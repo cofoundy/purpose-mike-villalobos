@@ -14,7 +14,7 @@ import { siteConfig } from "../config";
     <div class="grid md:grid-cols-3 gap-8">
       {siteConfig.books.map((book, index) => (
         <div class={`scroll-animate-scale stagger-${index + 1} book-card-wrapper`} style="perspective: 1000px;">
-          <div class={`book-card bg-white rounded-lg p-6 shadow-lg border-2 transition-all duration-300 ${index === 0 ? 'border-accent' : 'border-gray-200 hover:border-accent'}`}>
+          <div class="book-card bg-white rounded-lg p-6 shadow-lg border-2 border-gray-200 hover:border-accent transition-all duration-300">
             <!-- Book Cover Placeholder -->
             <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded aspect-[3/4] flex items-center justify-center mb-6 shadow-inner">
               <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
