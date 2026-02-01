@@ -1,0 +1,89 @@
+---
+// Sticky reveal quote section
+---
+
+<section id="purpose-quote" class="relative bg-black text-white">
+  <!-- Scroll container - creates the scroll distance -->
+  <div class="h-[300vh] relative">
+    <!-- Sticky content - stays centered while scrolling -->
+    <div class="sticky top-0 h-screen flex items-center justify-center">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        <h2 class="text-sm font-bold tracking-widest uppercase mb-12 opacity-0 quote-line" data-line="0">
+          WHAT PURPOSE MEANS
+        </h2>
+
+        <div class="space-y-4">
+          <p class="font-display text-2xl md:text-4xl leading-relaxed opacity-0 quote-line" data-line="1">
+            Purpose is investing with clarity
+          </p>
+          <p class="font-display text-2xl md:text-4xl leading-relaxed opacity-0 quote-line" data-line="2">
+            and living with intention —
+          </p>
+          <p class="font-display text-2xl md:text-4xl leading-relaxed opacity-0 quote-line" data-line="3">
+            the discipline to build wealth and life
+          </p>
+          <p class="font-display text-2xl md:text-4xl leading-relaxed opacity-0 quote-line" data-line="4">
+            by design, not by chance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.getElementById('purpose-quote');
+  const lines = document.querySelectorAll('.quote-line');
+
+  if (section && lines.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          window.addEventListener('scroll', handleScroll);
+        } else {
+          window.removeEventListener('scroll', handleScroll);
+        }
+      });
+    }, { threshold: 0 });
+
+    observer.observe(section);
+
+    function handleScroll() {
+      const rect = section.getBoundingClientRect();
+      const sectionHeight = section.offsetHeight;
+      const viewportHeight = window.innerHeight;
+
+      // Calculate scroll progress through the section (0 to 1)
+      const scrolled = -rect.top;
+      const scrollableDistance = sectionHeight - viewportHeight;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+
+      // Reveal lines based on progress
+      lines.forEach((line, index) => {
+        const lineStart = index * 0.18; // Each line starts at 0%, 18%, 36%, 54%, 72%
+        const lineEnd = lineStart + 0.15; // Each line takes 15% of scroll to fully appear
+
+        let opacity = 0;
+        let translateY = 20;
+
+        if (progress >= lineStart) {
+          const lineProgress = Math.min(1, (progress - lineStart) / (lineEnd - lineStart));
+          opacity = lineProgress;
+          translateY = 20 * (1 - lineProgress);
+        }
+
+        (line as HTMLElement).style.opacity = String(opacity);
+        (line as HTMLElement).style.transform = `translateY(${translateY}px)`;
+      });
+    }
+
+    // Initial call
+    handleScroll();
+  }
+</script>
+
+<style>
+  .quote-line {
+    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+  }
+</style>

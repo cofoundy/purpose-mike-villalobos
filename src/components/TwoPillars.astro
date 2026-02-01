@@ -1,0 +1,50 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section id="pillars" class="py-20 bg-white overflow-hidden">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="scroll-animate font-display text-3xl md:text-4xl font-bold text-center mb-16">
+      The Two Pillars of Purpose
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      {siteConfig.pillars.map((pillar, index) => (
+        <div class={`pillar-card scroll-animate-${index === 0 ? 'left' : 'right'} relative`}>
+          <!-- Vertical line -->
+          <div class="pillar-line absolute left-0 top-0 w-1 bg-accent rounded-full"></div>
+
+          <div class="pl-6">
+            <h3 class="text-xl font-bold text-navy mb-4">{pillar.title}</h3>
+            <p class="text-text-muted leading-relaxed">{pillar.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pillar-line {
+    height: 0;
+    transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pillar-card.in-view .pillar-line {
+    height: 100%;
+  }
+</style>
+
+<script>
+  const pillars = document.querySelectorAll('.pillar-card');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.3 });
+
+  pillars.forEach(pillar => observer.observe(pillar));
+</script>

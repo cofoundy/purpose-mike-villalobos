@@ -1,0 +1,43 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section id="books" class="py-20 bg-gray-bg">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="scroll-animate font-display text-3xl md:text-4xl font-bold text-center mb-4">
+      BOOKS
+    </h2>
+    <p class="scroll-animate text-text-muted text-center mb-12 max-w-2xl mx-auto">
+      {siteConfig.booksSubtitle}
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {siteConfig.books.map((book, index) => (
+        <div class={`scroll-animate-scale stagger-${index + 1} book-card-wrapper`} style="perspective: 1000px;">
+          <div class={`book-card bg-white rounded-lg p-6 shadow-lg border-2 transition-all duration-300 ${index === 0 ? 'border-accent' : 'border-gray-200 hover:border-accent'}`}>
+            <!-- Book Cover Placeholder -->
+            <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded aspect-[3/4] flex items-center justify-center mb-6 shadow-inner">
+              <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-navy mb-2">{book.title}</h3>
+            <p class="text-text-muted text-sm">{book.status}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .book-card {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .book-card-wrapper:hover .book-card {
+    transform: rotateY(-5deg) rotateX(5deg) translateY(-8px);
+    box-shadow: 20px 20px 40px -20px rgba(0, 0, 0, 0.2);
+  }
+</style>

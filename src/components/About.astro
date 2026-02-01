@@ -1,0 +1,80 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section id="about" class="py-20 bg-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="scroll-animate font-display text-3xl md:text-4xl font-bold text-center mb-16">
+      ABOUT MIKE
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <!-- Photo with reveal effect -->
+      <div class="about-image-wrapper relative rounded-lg overflow-hidden max-h-[480px]">
+        <img
+          src={`${import.meta.env.BASE_URL}/profile.jpg`}
+          alt={siteConfig.about.title}
+          class="w-full h-full object-cover object-top"
+          onerror="this.style.display='none'"
+        />
+        <!-- Reveal overlay -->
+        <div class="about-image-overlay absolute inset-0 bg-navy"></div>
+      </div>
+
+      <!-- Bio -->
+      <div class="scroll-animate-right">
+        <h3 class="text-2xl font-bold text-navy mb-2">
+          {siteConfig.about.title}
+        </h3>
+        <p class="text-text-muted font-medium mb-6">
+          {siteConfig.about.subtitle}
+        </p>
+
+        <p class="text-text-dark leading-relaxed mb-4">
+          <strong>Economist, market strategist, and macro systematic investor</strong> with experience in hedge-fund research, private investment advisory, and university-level instruction.
+        </p>
+
+        <p class="text-text-dark leading-relaxed mb-4">
+          Former <strong>Equities Trader</strong>, <strong>Portfolio Manager</strong>, and <strong>Head of Investment Strategies</strong> — developing systematic equity frameworks with a disciplined, data-driven approach.
+        </p>
+
+        <p class="text-text-dark leading-relaxed mb-4">
+          Today, he leads <strong>AtarionX</strong> — a research and software firm helping investors make decisions grounded in macro data and institutional-grade discipline.
+        </p>
+
+        <p class="text-text-muted text-sm mt-6">
+          Recognized among top global performers in the <strong>Global Bloomberg Trading Challenge</strong>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-image-overlay {
+    transform-origin: top;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .about-image-wrapper.revealed .about-image-overlay {
+    transform: scaleY(0);
+  }
+</style>
+
+<script>
+  const imageWrapper = document.querySelector('.about-image-wrapper');
+
+  if (imageWrapper) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('revealed');
+          }, 200);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(imageWrapper);
+  }
+</script>

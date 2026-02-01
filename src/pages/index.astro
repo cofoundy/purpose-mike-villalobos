@@ -1,0 +1,63 @@
+---
+import "../styles/global.css";
+import { siteConfig } from "../config";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Welcome from "../components/Welcome.astro";
+import WhatPurposeMeans from "../components/WhatPurposeMeans.astro";
+import TwoPillars from "../components/TwoPillars.astro";
+import Books from "../components/Books.astro";
+import Education from "../components/Education.astro";
+import Tools from "../components/Tools.astro";
+import Highlights from "../components/Highlights.astro";
+import About from "../components/About.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{siteConfig.brand} by {siteConfig.name}</title>
+    <meta name="description" content={siteConfig.tagline} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-navy antialiased">
+    <Header />
+    <main>
+      <Hero />
+      <Welcome />
+      <WhatPurposeMeans />
+      <TwoPillars />
+      <div class="section-divider" data-divider></div>
+      <Books />
+      <Education />
+      <div class="section-divider" data-divider></div>
+      <Tools />
+      <Highlights />
+      <div class="section-divider" data-divider></div>
+      <About />
+    </main>
+
+    <script>
+      // Animate section dividers on scroll
+      const dividers = document.querySelectorAll('[data-divider]');
+      const dividerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('expanded');
+          }
+        });
+      }, { threshold: 0.5 });
+
+      dividers.forEach(d => dividerObserver.observe(d));
+    </script>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,30 @@
+---
+import { siteConfig } from "../config";
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="scroll-animate font-display text-3xl md:text-4xl font-bold text-center mb-4">
+      HIGHLIGHTS
+    </h2>
+    <p class="scroll-animate text-text-muted text-center mb-12 max-w-2xl mx-auto">
+      {siteConfig.highlightsSubtitle}
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {siteConfig.highlights.map((highlight, index) => (
+        <div class={`scroll-animate-scale stagger-${index + 1} card-hover`}>
+          <!-- Video Placeholder -->
+          <div class="bg-gray-card rounded-lg aspect-video flex items-center justify-center mb-4">
+            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-navy mb-1">{highlight.title}</h3>
+          <p class="text-text-muted text-sm">{highlight.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
